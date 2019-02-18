@@ -13,4 +13,27 @@ router.post('/', (req, res) => {
   User.create(req.body).then(user => res.json(user));
 });
 
+/* GET user by id */
+router.get('/:userId', (req, res) => {
+  User.findById(req.params.userId).then(user => res.json(user));
+});
+
+/* PUT user by id */
+router.put('/:userId', (req, res) => {
+  User.findById(req.params.userId).then(user => user.update(
+    { name: req.body.name },
+  )).then(user => res.json(user));
+});
+
+/* DELETE user by id */
+router.delete('/:userId', (req, res) => {
+  User.findById(req.params.userId).then((user) => {
+    if (user) {
+      user.destroy();
+    } else {
+      res.sendStatus(404);
+    }
+  }).then(() => res.sendStatus(200));
+});
+
 module.exports = router;

@@ -4,6 +4,9 @@ Example REST API using Node, Swagger, and Docker
 TODO: 
 - add links to the "tech stack" section
 - actually add swagger to the project
+- add endpoints to showcase the many-to-many relationship between User objects and Todo objects
+- add Postman collection and tests
+- add unit tests
 
 ## Run the app
 ```bash

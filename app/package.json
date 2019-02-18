@@ -18,10 +18,13 @@
     "pretest": "eslint ."
   },
   "dependencies": {
+    "config": "^3.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "mysql2": "^1.6.5",
+    "sequelize": "^4.42.0"
   },
   "devDependencies": {
     "eslint": "^5.14.0",

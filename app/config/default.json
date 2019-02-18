@@ -1,0 +1,10 @@
+{
+  // the defaults in this file are dev configs
+  // to override them, use env vars
+  "db": {
+    "host": "mysql",
+    "user": "root",
+    "password": "",
+    "database": "todo"
+  }
+}

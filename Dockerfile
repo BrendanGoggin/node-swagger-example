@@ -8,6 +8,7 @@ COPY app/package*.json ./
 USER node
 RUN npm install
 COPY --chown=node:node ./app .
+COPY --chown=node:node ./db /home/node/db
 
 EXPOSE 3000
 CMD [ "npm", "start" ]

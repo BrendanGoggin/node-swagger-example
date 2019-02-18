@@ -12,7 +12,7 @@ services:
       - ./db:/home/node/db
     links:
       - mysql
-    command: sh -c "../db/wait-for-it.sh mysql:3306 && npm start"
+    command: sh -c "../db/wait-for-it.sh mysql:3306 && npm run dev"
     
   mysql:
     container_name: mysql

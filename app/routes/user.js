@@ -37,7 +37,7 @@ router.put('/:userId', (req, res) => {
   }).then(
     user => res.json(user),
   ).catch((error) => {
-    /* TODO: make this error handling into middleware that handles  all HttpErrors like this */
+    /* TODO: make this error handling into middleware that handles all HttpErrors like this */
     if (error instanceof createError.HttpError) {
       res.sendStatus(error.statusCode);
     } else {
@@ -55,7 +55,7 @@ router.delete('/:userId', (req, res) => {
 
     user.destroy();
   }).then(() => res.sendStatus(200)).catch((error) => {
-    /* TODO: make this error handling into middleware that handles  all HttpErrors like this */
+    /* TODO: make this error handling into middleware that handles all HttpErrors like this */
     if (error instanceof createError.HttpError) {
       res.sendStatus(error.statusCode);
     } else {

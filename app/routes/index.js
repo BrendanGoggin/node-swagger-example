@@ -4,9 +4,7 @@ const router = express.Router();
 
 /* GET hello world. */
 router.get('/', (req, res) => {
-  res.json({
-    hello: 'world',
-  });
+  res.sendStatus(200);
 });
 
 module.exports = router;

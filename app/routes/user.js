@@ -1,5 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
+
+const { logger } = require('../util/logger');
 const { User } = require('../sequelize');
 
 const router = express.Router();
@@ -20,6 +22,7 @@ router.get('/:userId', (req, res) => {
     if (user) {
       res.json(user);
     } else {
+      logger.info(`user ${req.params.userId} not found!`);
       res.sendStatus(404);
     }
   });

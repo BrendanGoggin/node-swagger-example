@@ -2,13 +2,15 @@ version: '3.7'
 services:
   init:
     container_name: db-init
-    build: .
+    build: ../../Dockerfile
+    image: node-swagger-example/todo
     restart: always
+    working_dir: /root
     volumes:
       - ../../db:/db
     links:
       - mysql
-    command: bash -c "./db/init/bash-wait-for-it.sh mysql:3306 -t 30 && ./db/init/init.sh"
+    command: bash -c "./db/wait-for-it.sh mysql:3306 -t 30 && ./db/init/init.sh"
     
   mysql:
     container_name: mysql

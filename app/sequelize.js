@@ -1,5 +1,7 @@
 const config = require('config');
 const Sequelize = require('sequelize');
+
+const { logger } = require('./util/logger');
 const UserModel = require('./models/user');
 const TodoModel = require('./models/todo');
 
@@ -8,6 +10,7 @@ const dbConfig = config.get('db');
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
   host: dbConfig.host,
   dialect: 'mysql',
+  logging: false,
   pool: {
     max: 10,
     min: 0,
@@ -30,7 +33,7 @@ User.belongsToMany(Todo, { through: TodoToUser, unique: false });
 // use { force: true } to wipe db every time
 sequelize.sync()
   .then(() => {
-    console.log('Database & tables created!');
+    logger.info('Sequelize sync complete');
   });
 
 module.exports = {

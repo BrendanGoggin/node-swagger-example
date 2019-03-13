@@ -1,5 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+
+const { errorMiddleware } = require('./util/errorMiddleware');
 const { responseLoggerMiddleware } = require('./util/logger');
 
 const indexRouter = require('./routes/index');
@@ -17,5 +19,7 @@ app.use(responseLoggerMiddleware);
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/todo', todoRouter);
+
+app.use(errorMiddleware);
 
 module.exports = app;

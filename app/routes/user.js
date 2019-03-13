@@ -7,17 +7,17 @@ const { User } = require('../sequelize');
 const router = express.Router();
 
 /* GET users */
-router.get('/', (req, res) => {
-  User.findAll().then(users => res.json(users));
+router.get('/', (req, res, next) => {
+  User.findAll().then(users => res.json(users)).catch(next);
 });
 
 /* POST new user */
-router.post('/', (req, res) => {
-  User.create(req.body).then(user => res.json(user));
+router.post('/', (req, res, next) => {
+  User.create(req.body).then(user => res.json(user)).catch(next);
 });
 
 /* GET user by id */
-router.get('/:userId', (req, res) => {
+router.get('/:userId', (req, res, next) => {
   User.findById(req.params.userId).then((user) => {
     if (user) {
       res.json(user);
@@ -25,11 +25,11 @@ router.get('/:userId', (req, res) => {
       logger.info(`user ${req.params.userId} not found!`);
       res.sendStatus(404);
     }
-  });
+  }).catch(next);
 });
 
 /* PUT user by id */
-router.put('/:userId', (req, res) => {
+router.put('/:userId', (req, res, next) => {
   User.findById(req.params.userId).then((user) => {
     // 404 if not found
     if (!user) throw createError(404);
@@ -39,33 +39,17 @@ router.put('/:userId', (req, res) => {
     );
   }).then(
     user => res.json(user),
-  ).catch((error) => {
-    /* TODO: make this error handling into middleware that handles all HttpErrors like this */
-    if (error instanceof createError.HttpError) {
-      res.sendStatus(error.statusCode);
-    } else {
-      res.sendStatus(500);
-      throw error;
-    }
-  });
+  ).catch(next);
 });
 
 /* DELETE user by id */
-router.delete('/:userId', (req, res) => {
+router.delete('/:userId', (req, res, next) => {
   User.findById(req.params.userId).then((user) => {
     // 404 if not found
     if (!user) throw createError(404);
 
     user.destroy();
-  }).then(() => res.sendStatus(200)).catch((error) => {
-    /* TODO: make this error handling into middleware that handles all HttpErrors like this */
-    if (error instanceof createError.HttpError) {
-      res.sendStatus(error.statusCode);
-    } else {
-      res.sendStatus(500);
-      throw error;
-    }
-  });
+  }).then(() => res.sendStatus(200)).catch(next);
 });
 
 module.exports = router;

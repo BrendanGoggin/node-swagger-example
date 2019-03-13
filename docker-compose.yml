@@ -14,7 +14,7 @@ services:
       - ./db:/root/db
     links:
       - mysql
-    command: sh -c "../db/wait-for-it.sh mysql:3306 && yarn run dev"
+    command: /bin/bash -c "../db/wait-for-it.sh mysql:3306 && yarn run dev"
     
   mysql:
     container_name: mysql

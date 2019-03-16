@@ -2,13 +2,20 @@ const createError = require('http-errors');
 const express = require('express');
 
 const { logger } = require('../util/logger');
+const { getOffsetAndLimit } = require('../util/requestParser');
 const { User } = require('../sequelize');
 
 const router = express.Router();
 
 /* GET users */
 router.get('/', (req, res, next) => {
-  User.findAll().then(users => res.json(users)).catch(next);
+  try {
+    const { offset, limit } = getOffsetAndLimit(req);
+    User.findAll({ limit, offset }).then(users => res.json(users)).catch(next);
+  }
+  catch(err) {
+    return next(err);
+  }
 });
 
 /* POST new user */

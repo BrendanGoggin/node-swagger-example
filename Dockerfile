@@ -1,7 +1,7 @@
-# alternate Dockerfile for using an alpine image, but for now this project will use an ubuntu image
+# uses ubuntu base image, installs node, yarn, etc.
 FROM ubuntu:18.04
 
-# general setup: bash, node, yarn, etc.
+# general setup: node, yarn, etc.
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
   curl \
   gnupg2 \
